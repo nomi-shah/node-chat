@@ -17,13 +17,13 @@ app.use(express.static(publicPath));
 io.on('connection', (socket)=>{
         console.log(' new user connected');
 
-        socket.emit('newEmail' ,{
-            from: 'nomi@example.com',
+        socket.emit('newMessage' ,{
+            from: 'nomi',
             text:'hey , whats going on',
             createdAt:123
         });
-        socket.on('createEmail',(newEmail)=>{
-        console.log('createEmail',newEmail);
+        socket.on('createMessage',(message)=>{
+            console.log('creatMessage',message);
         });
         
         socket.on('disconnect',()=>{
