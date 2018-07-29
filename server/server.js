@@ -26,7 +26,7 @@ socket.broadcast.emit('newMessage',generateMessage('Adim','new user join'));
         socket.on('createMessage',(message, callback)=>{
             console.log('creatMessage',message);
             io.emit('newMessage', generateMessage( message.from,message.text));
-            callback('this is from server');
+            callback();
             // socket.broadcast.emit('newMessage',{
             //     from : message.from,
             //     text : message.text,
