@@ -1,6 +1,23 @@
 //  import { isMoment } from "moment";
 
 var socket = io();
+function scrolltoBottom(){
+//  selector 
+var messages = jQuery('#messages');
+var  newMessage= messages.children('li:last-child')
+//height
+var clientHeight =messages.prop('clientHeight');
+var scrollTop = messages.prop('scrollTop');
+var scrollHeight =  messages.prop('scrolllHeight');
+var newMessageHeight = newMessage.innerHeight();
+var lastMessageHeight = newMessage.prev().innerHeight();
+
+if (clientHeight + scrollTop +newMessageHeight + lastMessageHeight >= scrollHeight){
+    messages.scrollTop(scrollHeight);
+}
+
+}
+
 socket.on('connect',()=>{
     console.log ("connected to server");
 });
@@ -20,7 +37,7 @@ var html = Mustache.render(template,{
 
 });
 jQuery('#message').append(html);
- 
+ scrolltoBottom();
 // var li =jQuery('<li></li>');
 //     li.text(`${message.from} ${formattedTime}: ${message.text}`);
 
