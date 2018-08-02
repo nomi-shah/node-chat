@@ -1,3 +1,5 @@
+//import { isMoment } from "moment";
+
 var socket = io();
 socket.on('connect',()=>{
     console.log ("connected to server");
@@ -8,9 +10,10 @@ socket.on ('disconnect',()=>{
 });
 
 socket.on('newMessage', (message)=>{
-console.log('New Message' ,message);
-    var li =jQuery('<li></li>');
-    li.text(`${message.from}: ${message.text}`);
+//console.log('New Message' ,message);
+var formattedTime = moment(message.createdAt).format('h:mm a');
+var li =jQuery('<li></li>');
+    li.text(`${message.from} ${formattedTime}: ${message.text}`);
 
     jQuery('#message').append(li);
 
