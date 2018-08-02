@@ -1,4 +1,4 @@
-//import { isMoment } from "moment";
+//  import { isMoment } from "moment";
 
 var socket = io();
 socket.on('connect',()=>{
@@ -12,10 +12,19 @@ socket.on ('disconnect',()=>{
 socket.on('newMessage', (message)=>{
 //console.log('New Message' ,message);
 var formattedTime = moment(message.createdAt).format('h:mm a');
-var li =jQuery('<li></li>');
-    li.text(`${message.from} ${formattedTime}: ${message.text}`);
+var template =jQuery('#message-template').html(); 
+var html = Mustache.render(template,{
+    text:message.text,
+    from:message.from,
+    createdAt:formattedTime 
 
-    jQuery('#message').append(li);
+});
+jQuery('#message').append(html);
+ 
+// var li =jQuery('<li></li>');
+//     li.text(`${message.from} ${formattedTime}: ${message.text}`);
+
+//     jQuery('#message').append(li);
 
 });
 // socket.emit('createMessage',{
